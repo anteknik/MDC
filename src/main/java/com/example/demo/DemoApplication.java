@@ -1,8 +1,6 @@
 package com.example.demo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
+import org.slf4j.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DemoApplication {
 	private static final Logger LOGGER =
 			LoggerFactory.getLogger(DemoApplication.class);
+	private static final Marker IMPORTANT =
+			MarkerFactory.getMarker("IMPORTANT");
 
 	public static void main(String[] args) {
 
@@ -23,7 +23,7 @@ public class DemoApplication {
 		LOGGER.debug("This is the second INFO level log message!");
 
 		MDC.put("executionStep", "two");
-		LOGGER.error("This is the third INFO level log message!");
+		LOGGER.error(IMPORTANT,"This is the third INFO level log message!");
 
 	}
 
