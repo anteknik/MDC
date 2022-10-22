@@ -1,11 +1,30 @@
 <configuration>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%X{user}] [%X{executionStep}] %-5level %logger{36} %line - %msg%n</pattern>
         </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
     </appender>
 
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
+        <file>C:\\Users\\Lenovo\\Documents\\ajava\\ajava\\src\\demo\\logback.log</file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <filter class="com.example.demo.SampleFilter" />
+    </appender>
+
+    <logger name="com.example.demo">
+        <appender-ref ref="console"/>
+    </logger>
+
     <root level="info">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="file" />
     </root>
 </configuration>

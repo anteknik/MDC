@@ -2,6 +2,7 @@ package com.example.demo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -14,7 +15,16 @@ public class DemoApplication {
 
 		LOGGER.info("This is an INFO level log message!");
 		LOGGER.error("This is an ERROR level log message!");
-		//SpringApplication.run(DemoApplication.class, args);
+
+		MDC.put("user", "rafal.kuc@sematext.com");
+		LOGGER.info("This is the first INFO level log message!");
+
+		MDC.put("executionStep", "one");
+		LOGGER.debug("This is the second INFO level log message!");
+
+		MDC.put("executionStep", "two");
+		LOGGER.error("This is the third INFO level log message!");
+
 	}
 
 }
